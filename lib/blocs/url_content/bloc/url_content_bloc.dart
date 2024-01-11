@@ -8,8 +8,8 @@ part 'url_content_event.dart';
 part 'url_content_state.dart';
 
 class UrlContentBloc extends Bloc<UrlContentEvent, UrlContentState> {
-  final UrlContentRepository _UrlContentRepository;
-  UrlContentBloc(this._UrlContentRepository) : super(UrlContentInitial()) {
+  final UrlContentRepository _urlContentRepository;
+  UrlContentBloc(this._urlContentRepository) : super(UrlContentInitial()) {
     on<UrlContentFetched>(_onUrlContentFetched);
   }
 
@@ -17,8 +17,8 @@ class UrlContentBloc extends Bloc<UrlContentEvent, UrlContentState> {
       UrlContentFetched event, Emitter<UrlContentState> emit) async {
     emit(UrlContentLoading());
     try {
-      final UrlContent = await _UrlContentRepository.getUrlContent();
-      emit(UrlContentSuccess(UrlContent));
+      final urlContent = await _urlContentRepository.getUrlContent();
+      emit(UrlContentSuccess(urlContent));
     } catch (e) {
       emit(UrlContentFailure(e.toString()));
     }
